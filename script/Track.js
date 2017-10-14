@@ -1,5 +1,7 @@
-function Track(path) {
+function Track(path, onload) {
 	this.path = path;
+	this.onload = onload || (() => {});
+	
 	this.loaded = false;
 	this.buffer = null;
 	
@@ -14,6 +16,8 @@ Track.prototype.load = function() {
 	req.onload = () => {
 		audioContext.decodeAudioData(req.response, buffer => {
 			this.buffer = buffer;
+			this.loaded = true;
+			this.onload();
 		});
 	};
 	req.send();
