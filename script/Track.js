@@ -1,6 +1,8 @@
 define(function() {
-	return function Track(path, onload) {
+	return function Track(name, path, beat, onload) {
+		this.name = name;
 		this.path = path;
+		this.beat = beat;
 		this.onload = onload || (() => {});
 		
 		this.loaded = false;
