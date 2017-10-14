@@ -3,9 +3,10 @@ function Track(path, onload) {
 	this.onload = onload || (() => {});
 	
 	this.loaded = false;
-	this.buffer = null;
+	this.element = document.createElement('audio', {preload: 'auto', src: this.path});
+	this.element.addEventListener('loadeddata', () => {this.loaded = true; this.onload();});
+	this.element.src = this.path;
 	
-	this.load();
 };
 
 Track.prototype.load = function() {
