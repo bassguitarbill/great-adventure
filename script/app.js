@@ -1,7 +1,7 @@
 requirejs.config({
 });
 
-requirejs(['trackLoader', 'trackData', 'gameScreenContext', 'BeatEmitter'], function(trackLoader, trackData, ctx, BeatEmitter) {
+requirejs(['trackLoader', 'trackData', 'gameScreenContext', 'BeatEmitter', 'Rect'], function(trackLoader, trackData, ctx, BeatEmitter, Rect) {
 	
 	var tracks = trackLoader(trackData, function(tracks) {
 		window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -10,15 +10,13 @@ requirejs(['trackLoader', 'trackData', 'gameScreenContext', 'BeatEmitter'], func
 		var source = audioContext.createMediaElementSource(audioElement);
 		source.connect(audioContext.destination);
 		audioElement.play();
+		var game = {addActor: a => {}};
 		var be = new BeatEmitter(tracks[0].beat, source.mediaElement, function() {
-			ctx.fillStyle = 'rgb(200,0,0)'; // sets the color to fill in the rectangle with
-			ctx.fillRect(10, 10, 55, 50);
+			new Rect(game, Math.random() * 600, Math.random() * 800, 50, 50).draw(ctx);
 		}, function() {
-			ctx.fillStyle = 'rgb(0,0,200)'; // sets the color to fill in the rectangle with
-			ctx.fillRect(10, 10, 55, 50);
+			new Rect(game, Math.random() * 600, Math.random() * 800, 20, 20).draw(ctx);
 		});
 		be.start();
-		window.setTimeout(() => {audioElement.pause()},5000);
 	});
 	
 });
