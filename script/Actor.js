@@ -12,6 +12,8 @@ define(function() {
 	Actor.prototype.draw = function() {
 		throw ("Error on actor: no 'draw' method defined! " + this);
 	};
+	Actor.prototype.step = function() {
+	};
 	
 	return Actor;
 });

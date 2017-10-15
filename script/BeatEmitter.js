@@ -5,7 +5,7 @@ define(function() {
 		this.downbeat = downbeat || (() => {});
 		this.upbeat = upbeat || (() => {});
 		
-		this.isDownbeat = true;
+		this.isDownbeat = false;
 		
 		this.intervalID = 0;
 	};
