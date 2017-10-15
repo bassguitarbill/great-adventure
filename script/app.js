@@ -9,7 +9,12 @@ requirejs(['trackLoader', 'trackData', 'gameScreenContext', 'BeatEmitter', 'Rect
 		var audioElement = tracks[0].element;
 		var source = audioContext.createMediaElementSource(audioElement);
 		source.connect(audioContext.destination);
-		audioElement.play();
+		
+		var playButton = document.getElementById("playButton");
+		playButton.addEventListener("click", e => {audioElement.play()})
+		var pauseButton = document.getElementById("pauseButton");
+		pauseButton.addEventListener("click", e => {audioElement.pause()})
+		
 		var game = {addActor: a => {}};
 		var be = new BeatEmitter(tracks[0].beat, source.mediaElement, function() {
 			new Rect(game, Math.random() * 600, Math.random() * 800, 50, 50).draw(ctx);
