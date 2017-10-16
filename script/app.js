@@ -36,6 +36,7 @@ requirejs(
 		
 		var be = new BeatEmitter(tracks[0].beat, source.mediaElement, function() {
 			new Rect(game, Math.random() * 600, Math.random() * 800, 50, 50);
+			game.beat();
 		}, function() {
 			new Rect(game, Math.random() * 600, Math.random() * 800, 20, 20);
 		});
